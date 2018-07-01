@@ -20,7 +20,7 @@ export class DeleteConfirmDialogComponent implements OnInit {
 
     ngOnInit() {}
 
-    closeDialog(item): void {
+    closeDialog(item?: any): void {
         this.dialogRef.close(item);
     }
 }

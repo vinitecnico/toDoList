@@ -108,12 +108,10 @@ export const MY_FORMATS = {
     BsDropdownModule.forRoot(),
     HttpClientModule
   ],
-  entryComponents: [ToDoListDialogComponent, DeleteConfirmDialogComponent, HomeComponent],
+  entryComponents: [ToDoListDialogComponent, DeleteConfirmDialogComponent],
   providers: [AngularFirestore, FormService,
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-platformBrowserDynamic().bootstrapModule(AppModule);
