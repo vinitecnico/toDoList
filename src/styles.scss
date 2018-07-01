@@ -26,3 +26,10 @@
 
 $fa-font-path: "../node_modules/font-awesome/fonts";
 @import '~font-awesome/scss/font-awesome.scss';
+
+.bg-light {
+    background-color: #673ab7 !important;
+    a {
+        color: #ffffff!important;
+    }
+}

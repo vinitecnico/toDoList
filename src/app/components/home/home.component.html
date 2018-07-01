@@ -6,7 +6,7 @@
     <!-- Position Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header="name">
-        name
+        Name
       </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
     </ng-container>
@@ -14,7 +14,7 @@
     <!-- Name Column -->
     <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef mat-sort-header="status">
-        status
+        Status
       </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.status.name}} </mat-cell>
     </ng-container>
@@ -22,7 +22,7 @@
     <!-- Symbol Column -->
     <ng-container matColumnDef="taskDate">
       <mat-header-cell *matHeaderCellDef mat-sort-header="taskDate">
-        taskDate
+        TaskDate
       </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.taskDate | date: 'dd/MMM/yyyy'}} </mat-cell>
     </ng-container>
