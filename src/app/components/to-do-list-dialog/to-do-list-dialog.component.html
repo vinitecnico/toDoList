@@ -1,0 +1,66 @@
+<div class="no-breadcrumbs">
+  <div class="row">
+    <div class="col-10 col-md-10">
+      <h2 class="md-header-title" mat-dialog-title *ngIf="!data.id; else editHeader">Nova Tarefa</h2>
+
+      <ng-template #editHeader>
+        <h2 class="md-header-title" mat-dialog-title>Editar Tarefa</h2>
+      </ng-template>
+    </div>
+    <div class="col-2 col-md-2 md-close-button">
+      <span (click)="closeDialog()" class="cursor-pointer">
+        <mat-icon class="btn" matTooltip="Fechar">close</mat-icon>
+      </span>
+    </div>
+  </div>
+</div>
+
+<section mat-dialog-content class="container with-maxwidth chapter">
+  <article class="article">
+    <div class="box box-default">
+      <div class="box-body">
+        <form [formGroup]="form">
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <mat-form-field class="full-width" style="width: 100%;">
+                <input matInput formControlName="name" placeholder="nome">
+                <mat-error>
+                  campo obrigatorio
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-6">
+              <mat-form-field class="full-width" style="width: 100%;">
+                <mat-select placeholder="status" formControlName="status">
+                  <mat-option>
+                    Selecione
+                  </mat-option>
+                  <mat-option *ngFor="let item of status" [value]="item">
+                    {{ item.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error>
+                  campo obrigatorio
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-6">
+              <mat-form-field>
+                <input matInput [matDatepicker]="dp" placeholder="Data da atividade" formControlName="taskDate">
+                <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                <mat-datepicker #dp></mat-datepicker>
+                <mat-error>
+                  campo obrigatorio
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </article>
+</section>
+<div mat-dialog-actions class="form-group">
+  <button color="cancel" mat-raised-button (click)="closeDialog()">cancelar</button>
+  <button color="primary" mat-raised-button (click)="createOrUpdate()">Salvar</button>
+</div>
