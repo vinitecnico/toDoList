@@ -48,6 +48,7 @@ import { ToDoListDialogComponent } from './components/to-do-list-dialog/to-do-li
 
 // service
 import { FormService } from './services/form.service';
+import { DeleteConfirmDialogComponent } from './components/delete-confirm-dialog/delete-confirm-dialog.component';
 
 export function ignorRequestFilters(req: any): boolean {
   return req.method === 'GET' && req.url.includes('i18n');
@@ -70,7 +71,8 @@ export const MY_FORMATS = {
     AppComponent,
     HomeComponent,
     NavBarComponent,
-    ToDoListDialogComponent
+    ToDoListDialogComponent,
+    DeleteConfirmDialogComponent
   ],
   imports: [
     CdkTableModule,
@@ -106,7 +108,7 @@ export const MY_FORMATS = {
     BsDropdownModule.forRoot(),
     HttpClientModule
   ],
-  entryComponents: [ToDoListDialogComponent, HomeComponent],
+  entryComponents: [ToDoListDialogComponent, DeleteConfirmDialogComponent, HomeComponent],
   providers: [AngularFirestore, FormService,
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }],

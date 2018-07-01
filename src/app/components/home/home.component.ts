@@ -6,6 +6,7 @@ import { ToDoListDialogComponent } from '../to-do-list-dialog/to-do-list-dialog.
 
 import * as moment from 'moment';
 import * as _ from 'lodash';
+import { DeleteConfirmDialogComponent } from '../delete-confirm-dialog/delete-confirm-dialog.component';
 
 @Component({
     selector: 'app-home',
@@ -13,6 +14,7 @@ import * as _ from 'lodash';
 })
 export class HomeComponent implements OnInit {
     displayedColumns: string[] = ['name', 'status', 'taskDate', 'options'];
+    isShowTable: boolean;
     dataSource = new MatTableDataSource<any>();
     @ViewChild(MatSort) sort: MatSort;
     constructor(private db: AngularFirestore, public dialog: MatDialog) { }
@@ -35,6 +37,11 @@ export class HomeComponent implements OnInit {
                 this.dataSource.data = _.sortBy(response, (x) => {
                     return x.name;
                 });
+                if (response.length > 0) {
+                    this.isShowTable = true;
+                } else {
+                    this.isShowTable = false;
+                }
                 this.dataSource.sort = this.sort;
                 this.dataSource.sortingDataAccessor = this.customDataSort;
             });
@@ -57,10 +64,24 @@ export class HomeComponent implements OnInit {
     }
 
     customDataSort = (data: any, sortHeaderId: string): any => {
-
         if (sortHeaderId === 'id' || typeof data[sortHeaderId] === 'number') {
             return data[sortHeaderId];
         }
+    }
+
+    openModalDelete(item) {
+        item.title = 'Deseja realmente excluir tarefa?';
+        const dialogRef = this.dialog.open(DeleteConfirmDialogComponent, {
+            width: '800px',
+            data: item
+        });
+
+        dialogRef.afterClosed()
+            .subscribe(result => {
+                if (result && result.id) {
+                    this.delete(result);
+                }
+            });
     }
 
     delete(item) {

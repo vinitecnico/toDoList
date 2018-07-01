@@ -43,10 +43,14 @@ export class ToDoListDialogComponent implements OnInit {
             }).subscribe((response: any) => {
                 this.status = response;
                 if (this.data && this.data.id) {
-                    const data = this.data;
+                    const data: any = this.data;
                     if (data.taskDate) {
                         data.taskDate = moment(this.data.taskDate, 'YYYY-MM-DDTHH:mm:ssZ');
                     }
+
+                    data.status = _.find(this.status, (x) => {
+                        return x.id === this.data.status.id;
+                    });
                     this.form.setValue(this.data);
                 }
             });

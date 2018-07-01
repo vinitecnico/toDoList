@@ -1,7 +1,8 @@
 <button mat-raised-button (click)="openModal()" color="primary" class="mb-3">
   <i class="fa fa-plus"></i> Novo</button>
-<div class="table-container">
-  <mat-table #table [dataSource]="dataSource" (matSortChange)="sortData($event)" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear style="width: 100%;">
+<div class="table-container" *ngIf="isShowTable">
+  <mat-table #table [dataSource]="dataSource" (matSortChange)="sortData($event)" matSort matSortActive="name" matSortDirection="asc"
+    matSortDisableClear style="width: 100%;">
 
     <!-- Position Column -->
     <ng-container matColumnDef="name">
@@ -32,11 +33,17 @@
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let element">
         <mat-icon class="btn" mat-button (click)="openModal(element)" matTooltip="Editar">mode_edit</mat-icon>
-        <mat-icon class="btn" mat-button (click)="delete(element)" matTooltip="Excluir">delete</mat-icon>
+        <mat-icon class="btn" mat-button (click)="openModalDelete(element)" matTooltip="Excluir">delete</mat-icon>
       </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+</div>
+
+<div *ngIf="!isShowTable">
+  <div class="alert alert-info" role="alert">
+    <strong>ops ;(</strong> - você ainda não tem tarefas cadastradas!
+  </div>
 </div>
